@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Escribir notas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Escribir notas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form action="" [formGroup]="escribir" (ngSubmit)="subirNota()">
+    <ion-list>
+      <ion-item>
+        <ion-input placeholder="Título de la nota" formControlName="titulo" type="email"></ion-input>
+        <!-- <input type="text" placeholder="Título de la nota" formControlName="titulo" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"> -->
+      </ion-item>
+      <ion-item *ngIf="escribir.get('titulo')?.hasError('required') && escribir.get('titulo')?.touched">
+        <p>
+          <ion-text color="danger">* Debes especificar un título</ion-text>
+        </p>
+      </ion-item>
+      <ion-item>
+        <ion-textarea placeholder="Contenido de la nota" formControlName="contenido"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="escribir.get('contenido')?.hasError('required') && escribir.get('contenido')?.touched">
+        <p>
+          <ion-text color="danger">* Debes especificar el contenido</ion-text>
+        </p>
+      </ion-item>
+      <ion-button type="submit" expand="block">Añadir</ion-button>
+      <ion-item>
+        <p>
+          <ion-text color="danger">No guardes datos personales</ion-text>
+        </p>
+      </ion-item>
+    </ion-list>
+    <ion-toast
+    position="top"
+    [isOpen]="isToastOpen"
+    [message]="mensajeToast"
+    [duration]="5000"
+    (didDismiss)="setOpen(false)"
+  ></ion-toast>
+  </form>
+</ion-content>

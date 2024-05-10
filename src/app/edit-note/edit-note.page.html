@@ -1,0 +1,38 @@
+<form action="" [formGroup]="editar" (ngSubmit)="confirmar()">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="cancelar()">Cancelar</ion-button>
+      </ion-buttons>
+      <ion-title>Editar nota</ion-title>
+      <ion-buttons slot="end">
+        <ion-button type="submit" [strong]="true">Confirmar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-input formControlName="titulo"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="editar.get('titulo')?.hasError('required') && editar.get('titulo')?.touched">
+      <p>
+        <ion-text color="danger">* Debes especificar un título</ion-text>
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-textarea placeholder="Contenido de la nota" formControlName="contenido"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="editar.get('contenido')?.hasError('required') && editar.get('contenido')?.touched">
+      <p>
+        <ion-text color="danger">* Debes especificar el contenido</ion-text>
+      </p>
+    </ion-item>
+    <ion-item>
+      <p>
+        <ion-text color="danger">No guardes datos personales</ion-text>
+      </p>
+    </ion-item>
+  </ion-list>
+
+</form>
